@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:purity_pallette/common/styles/spacing_styles.dart';
-import 'package:purity_pallette/common/widgets_login_signup/form_divider.dart';
+import 'package:purity_pallette/common/widgets/login_signup/form_divider.dart';
 import 'package:purity_pallette/features/authentication/screens/login/widgets/login_form.dart';
 import 'package:purity_pallette/features/authentication/screens/login/widgets/login_header.dart';
-import 'package:purity_pallette/common/widgets_login_signup/social_buttons.dart';
+import 'package:purity_pallette/common/widgets/login_signup/social_buttons.dart';
 import 'package:purity_pallette/utils/constants/sizes.dart';
 import 'package:purity_pallette/utils/helpers/helper_function.dart';
 

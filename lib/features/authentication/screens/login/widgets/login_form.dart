@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:purity_pallette/features/authentication/screens/password_configuration/forget_password.dart';
 import 'package:purity_pallette/features/authentication/screens/signup/signup.dart';
+import 'package:purity_pallette/navigation_menu.dart';
 import 'package:purity_pallette/utils/constants/sizes.dart';
 
 class LoginFormWidget extends StatelessWidget {
@@ -46,7 +48,8 @@ class LoginFormWidget extends StatelessWidget {
 
                 //Forget Password
                 TextButton(
-                    onPressed: () {}, child: const Text('Forget Password'))
+                    onPressed: () => Get.to(() => const ForgetPassword()),
+                    child: const Text('Forget Password'))
               ],
             ),
             const SizedBox(height: SSizes.spaceBtwnSections),
@@ -55,7 +58,8 @@ class LoginFormWidget extends StatelessWidget {
             SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                    onPressed: () {}, child: const Text('SignIn'))),
+                    onPressed: () => Get.to(const NavigationMenu()),
+                    child: const Text('SignIn'))),
             const SizedBox(
               height: SSizes.spaceBtwnItems,
             ),

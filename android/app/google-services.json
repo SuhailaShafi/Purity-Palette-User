@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "344914201556",
+    "project_id": "purity-palette-e75fe",
+    "storage_bucket": "purity-palette-e75fe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:344914201556:android:88d3c4ec47c70b48bae441",
+        "android_client_info": {
+          "package_name": "com.example.purity_pallette"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "344914201556-1uh4fscmoi3ok9siaf21sd0kjv5g9pa8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZv82-ncYp9rsnOwKIreAEpVx_AxL1358"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "344914201556-1uh4fscmoi3ok9siaf21sd0kjv5g9pa8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "344914201556-90o9piqa17na551i783ero004at3hjgt.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.purityPallette"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

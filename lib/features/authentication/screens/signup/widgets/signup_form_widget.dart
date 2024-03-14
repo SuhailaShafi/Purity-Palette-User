@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:purity_pallette/features/authentication/screens/signup/verify_email.dart';
 import 'package:purity_pallette/utils/constants/sizes.dart';
 
 class SignUpFormWidget extends StatelessWidget {
@@ -109,7 +111,7 @@ class SignUpFormWidget extends StatelessWidget {
         SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () => Get.to(() => const Verifyemail()),
               child: const Text('Create Account'),
             ))
       ],
