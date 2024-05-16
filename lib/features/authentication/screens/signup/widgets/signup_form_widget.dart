@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:purity_pallette/features/authentication/controllers/signup/signup_controller.dart';
 import 'package:purity_pallette/features/authentication/screens/signup/verify_email.dart';
+import 'package:purity_pallette/features/authentication/screens/signup/widgets/terms_and_conditions.dart';
 import 'package:purity_pallette/utils/constants/sizes.dart';
+import 'package:purity_pallette/utils/validators/validation.dart';
 
 class SignUpFormWidget extends StatelessWidget {
   const SignUpFormWidget({
@@ -14,107 +17,103 @@ class SignUpFormWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(SignupController());
     return Form(
+        key: controller.signupFormKey,
         child: Column(
-      children: [
-        const Row(
           children: [
-            Expanded(
-              child: TextField(
-                  expands: false,
-                  decoration: InputDecoration(
-                      labelText: 'First Name', prefixIcon: Icon(Iconsax.user))),
+            Row(
+              children: [
+                Expanded(
+                  child: TextFormField(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      validator: (value) =>
+                          SValidator.validateEmptyText('First name', value),
+                      controller: controller.firstName,
+                      expands: false,
+                      decoration: const InputDecoration(
+                          labelText: 'First Name',
+                          prefixIcon: Icon(Iconsax.user))),
+                ),
+                const SizedBox(width: SSizes.spaceBtwnInputFields),
+                Expanded(
+                  child: TextFormField(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      controller: controller.lastName,
+                      validator: (value) =>
+                          SValidator.validateEmptyText('Last name', value),
+                      expands: false,
+                      decoration: const InputDecoration(
+                          labelText: 'Last Name',
+                          prefixIcon: Icon(Iconsax.user))),
+                ),
+              ],
             ),
-            SizedBox(width: SSizes.spaceBtwnInputFields),
-            Expanded(
-              child: TextField(
-                  expands: false,
+
+            //Username
+            const SizedBox(height: SSizes.spaceBtwnInputFields),
+            TextFormField(
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                controller: controller.userName,
+                validator: (value) =>
+                    SValidator.validateEmptyText('Username', value),
+                expands: false,
+                decoration: const InputDecoration(
+                    labelText: 'Username',
+                    prefixIcon: Icon(Iconsax.user_edit))),
+
+            //Email
+            const SizedBox(height: SSizes.spaceBtwnInputFields),
+            TextFormField(
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                controller: controller.email,
+                validator: (value) => SValidator.validateEmail(value),
+                expands: false,
+                decoration: const InputDecoration(
+                    labelText: 'Email', prefixIcon: Icon(Iconsax.direct))),
+
+            //PhoneNumber
+            const SizedBox(height: SSizes.spaceBtwnInputFields),
+            TextFormField(
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                controller: controller.phoneNumber,
+                validator: (value) => SValidator.validatePhoneNumber(value),
+                expands: false,
+                decoration: const InputDecoration(
+                    labelText: 'Phone Number', prefixIcon: Icon(Iconsax.call))),
+
+            //Password
+            const SizedBox(height: SSizes.spaceBtwnInputFields),
+            Obx(
+              () => TextFormField(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  controller: controller.password,
+                  validator: (value) => SValidator.validatePassword(value),
+                  obscureText: controller.hidePassword.value,
                   decoration: InputDecoration(
-                      labelText: 'Last Name', prefixIcon: Icon(Iconsax.user))),
+                      labelText: 'Password',
+                      prefixIcon: Icon(Iconsax.password_check),
+                      suffixIcon: IconButton(
+                        icon: Icon(controller.hidePassword.value
+                            ? Iconsax.eye_slash
+                            : Iconsax.eye),
+                        onPressed: () => controller.hidePassword.value =
+                            !controller.hidePassword.value,
+                      ))),
             ),
-          ],
-        ),
-
-        //Username
-        const SizedBox(height: SSizes.spaceBtwnInputFields),
-        const TextField(
-            expands: false,
-            decoration: InputDecoration(
-                labelText: 'Username', prefixIcon: Icon(Iconsax.user_edit))),
-
-        //Email
-        const SizedBox(height: SSizes.spaceBtwnInputFields),
-        const TextField(
-            expands: false,
-            decoration: InputDecoration(
-                labelText: 'Email', prefixIcon: Icon(Iconsax.direct))),
-
-        //PhoneNumber
-        const SizedBox(height: SSizes.spaceBtwnInputFields),
-        const TextField(
-            expands: false,
-            decoration: InputDecoration(
-                labelText: 'Phone Number', prefixIcon: Icon(Iconsax.call))),
-
-        //Password
-        const SizedBox(height: SSizes.spaceBtwnInputFields),
-        const TextField(
-            obscureText: true,
-            decoration: InputDecoration(
-                labelText: 'Password',
-                prefixIcon: Icon(Iconsax.password_check),
-                suffixIcon: Icon(Iconsax.eye_slash))),
-        const SizedBox(height: SSizes.spaceBtwnInputFields),
-        Row(
-          children: [
-            SizedBox(
-                width: 24,
-                height: 24,
-                child: Checkbox(value: true, onChanged: (value) {})),
+            const SizedBox(height: SSizes.spaceBtwnInputFields),
+            TermsAndConditionsCheckbox(dark: dark),
             const SizedBox(
-              width: SSizes.spaceBtwnItems,
+              height: SSizes.spaceBtwnSections,
             ),
-            Text.rich(TextSpan(children: [
-              TextSpan(
-                  text: 'is agree to',
-                  style: Theme.of(context).textTheme.bodySmall),
-              TextSpan(
-                  text: ' Privacy policy ',
-                  style: Theme.of(context).textTheme.bodyMedium!.apply(
-                        color: dark
-                            ? Colors.white
-                            : const Color.fromARGB(255, 191, 26, 202),
-                        decoration: TextDecoration.underline,
-                        decorationColor: dark
-                            ? Colors.white
-                            : const Color.fromARGB(255, 191, 26, 202),
-                      )),
-              TextSpan(
-                  text: 'and', style: Theme.of(context).textTheme.bodySmall),
-              TextSpan(
-                  text: ' Terms of use ',
-                  style: Theme.of(context).textTheme.bodyMedium!.apply(
-                      color: dark
-                          ? Colors.white
-                          : const Color.fromARGB(255, 191, 26, 202),
-                      decoration: TextDecoration.underline,
-                      decorationColor: dark
-                          ? Colors.white
-                          : const Color.fromARGB(255, 191, 26, 202))),
-            ]))
+            //Signup Button
+            SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () => controller.signup(),
+                  child: const Text('Create Account'),
+                ))
           ],
-        ),
-        const SizedBox(
-          height: SSizes.spaceBtwnSections,
-        ),
-        //Signup Button
-        SizedBox(
-            width: double.infinity,
-            child: ElevatedButton(
-              onPressed: () => Get.to(() => const Verifyemail()),
-              child: const Text('Create Account'),
-            ))
-      ],
-    ));
+        ));
   }
 }

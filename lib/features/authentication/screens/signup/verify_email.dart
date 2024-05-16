@@ -2,21 +2,24 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:purity_pallette/common/widgets/success_screen/success_screen.dart';
+import 'package:purity_pallette/data/repositories/authentication/authentication-repository.dart';
+import 'package:purity_pallette/features/authentication/controllers/signup/verify_email_controller.dart';
 import 'package:purity_pallette/features/authentication/screens/login/login.dart';
 import 'package:purity_pallette/utils/constants/sizes.dart';
 import 'package:purity_pallette/utils/helpers/helper_function.dart';
 
 class Verifyemail extends StatelessWidget {
-  const Verifyemail({super.key});
-
+  const Verifyemail({super.key, this.email});
+  final String? email;
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(VerifyEmailController());
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         actions: [
           IconButton(
-              onPressed: () => Get.offAll(() => const LoginScreen()),
+              onPressed: () => AuthenticationRepository.instance.logout(),
               icon: const Icon(CupertinoIcons.clear))
         ],
       ),
@@ -44,7 +47,7 @@ class Verifyemail extends StatelessWidget {
                 height: SSizes.spaceBtwnItems,
               ),
               Text(
-                'Suhailaparvins@gmail.com',
+                email ?? '',
                 style: Theme.of(context).textTheme.labelLarge,
                 textAlign: TextAlign.center,
               ),
@@ -61,7 +64,7 @@ class Verifyemail extends StatelessWidget {
               ),
 
               //Buttons
-              SizedBox(
+              /*SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () => Get.to(() => SuccessScreen(
@@ -76,11 +79,11 @@ class Verifyemail extends StatelessWidget {
               ),
               const SizedBox(
                 height: SSizes.spaceBtwnItems,
-              ),
+              ),*/
               SizedBox(
                 width: double.infinity,
                 child: OutlinedButton(
-                  onPressed: () {},
+                  onPressed: () => controller.sendEmailVerification(),
                   child: const Text('Resend email'),
                 ),
               )

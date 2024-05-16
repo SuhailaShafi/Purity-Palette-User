@@ -8,31 +8,28 @@ class PrimaryHeaderContainerWidget extends StatelessWidget {
   final Widget child;
   @override
   Widget build(BuildContext context) {
-    return CurvedEdgeWidget(
-      child: Container(
-        color: SColors.primary,
-        padding: EdgeInsets.all(0),
-        child: SizedBox(
-          height: 400,
-          child: Stack(
-            children: [
-              Positioned(
-                top: -150,
-                left: 250,
-                child: CircularContainerWidget(
-                  backgroundColor: SColors.backgroundWhite.withOpacity(0.1),
-                ),
+    return Container(
+      color: SColors.primary,
+      padding: EdgeInsets.all(0),
+      child: SizedBox(
+        child: Stack(
+          children: [
+            Positioned(
+              top: -150,
+              left: 250,
+              child: CircularContainerWidget(
+                backgroundColor: SColors.backgroundWhite.withOpacity(0.1),
               ),
-              Positioned(
-                top: 100,
-                right: -300,
-                child: CircularContainerWidget(
-                  backgroundColor: SColors.backgroundWhite.withOpacity(0.1),
-                ),
+            ),
+            Positioned(
+              top: 150,
+              right: -250,
+              child: CircularContainerWidget(
+                backgroundColor: SColors.backgroundWhite.withOpacity(0.1),
               ),
-              child
-            ],
-          ),
+            ),
+            child
+          ],
         ),
       ),
     );

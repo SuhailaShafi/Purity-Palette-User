@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:purity_pallette/features/authentication/controllers.onboarding/onboarding_controller.dart';
+import 'package:purity_pallette/features/authentication/controllers/onboarding/onboarding_controller.dart';
 import 'package:purity_pallette/utils/constants/sizes.dart';
 
 class skipOnboardWidget extends StatelessWidget {

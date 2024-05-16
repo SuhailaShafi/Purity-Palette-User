@@ -5,7 +5,7 @@ class SCustomCurvedEdges extends CustomClipper<Path> {
   Path getClip(Size size) {
     var path = Path();
     path.lineTo(0, size.height);
-    final firstcurve = Offset(0, size.height - 40);
+    final firstcurve = Offset(0, size.height - 20);
     final lastcurve = Offset(size.width - 30, size.height - 20);
     path.quadraticBezierTo(
         firstcurve.dx, firstcurve.dy, lastcurve.dx, lastcurve.dy);
