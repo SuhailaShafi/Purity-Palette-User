@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:purity_pallette/data/repositories/products/product_repository.dart';
 import 'package:purity_pallette/features/shop/model/products/product_model.dart';
+import 'package:purity_pallette/utils/constants/image_strings.dart';
+import 'package:purity_pallette/utils/popup/full_screen_loader.dart';
 import 'package:purity_pallette/utils/popup/loaders.dart';
 
 class AllProductsController extends GetxController {
@@ -43,5 +45,18 @@ class AllProductsController extends GetxController {
   void assignProducts(List<ProductModel> products) {
     this.products.assignAll(products);
     sortProducts('Name');
+  }
+
+  Future<List<ProductModel>> searchProducts(String query) async {
+    SFullScreenLoader.openLoadingDialog('Searching', SImages.SAnimationImage);
+    try {
+      final products = await repository.searchProducts(query);
+      return products;
+    } catch (e) {
+      SLoaders.errorSnackBar(title: 'Error', message: e.toString());
+      return [];
+    } finally {
+      SFullScreenLoader.stopLoaduing();
+    }
   }
 }

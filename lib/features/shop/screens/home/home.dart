@@ -31,6 +31,7 @@ class HomeScreen extends StatelessWidget {
     final hmcontroller = Get.put(HomeController());
     final cartcontroller = Get.put(CartController());
     final categoryController = Get.put(CategoryController());
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(

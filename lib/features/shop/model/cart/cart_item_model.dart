@@ -42,10 +42,12 @@ class CartItemModel {
       price: json['price'] != null
           ? (json['price'] is double
               ? json['price']
-              : double.parse(json['price']))
+              : double.parse(json['price'].toString()))
           : 0.0,
       number: json['number'] != null
-          ? (json['number'] is int ? json['number'] : int.parse(json['number']))
+          ? (json['number'] is int
+              ? json['number']
+              : int.parse(json['number'].toString()))
           : 0,
       image1: json['image1'] ?? '',
     );

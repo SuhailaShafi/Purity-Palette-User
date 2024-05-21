@@ -57,4 +57,19 @@ class ProductRepository extends GetxController {
       throw 'Something went wrong';
     }
   }
+
+  Future<List<ProductModel>> searchProducts(String query) async {
+    try {
+      final querySnapshot = await _db
+          .collection('products')
+          .where('name', isGreaterThanOrEqualTo: query)
+          .where('name', isLessThanOrEqualTo: query + '\uf8ff')
+          .get();
+      return querySnapshot.docs
+          .map((doc) => ProductModel.fromSnapshot(doc))
+          .toList();
+    } catch (e) {
+      throw e;
+    }
+  }
 }

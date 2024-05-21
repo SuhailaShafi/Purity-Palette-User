@@ -22,7 +22,7 @@ class SImages {
   static const String ImgcreditCard = 'assets/images/credit_card.png';
   static const String ImgmasterCard = 'assets/images/master_card.png';
   static const String ImgPayPal = 'assets/images/paypal.jpg';
-  static const String ImgVisa = ' assets/images/visa.jpg';
+  static const String ImgVisa = 'assets/images/visa.jpg';
   static const String ImgPayStack = 'assets/images/paystack.png';
   static const String ImgPaytm = 'assets/images/paytm.jpeg';
 

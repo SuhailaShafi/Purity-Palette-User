@@ -60,13 +60,25 @@ class AddressModel {
       name: data['name'] ?? '',
       street: data['street'] ?? '',
       city: data['city'] ?? '',
-      postalCode: data['potalCode'] ?? '',
+      postalCode: data['postalCode'] ?? '',
       phoneNumber: data['phoneNumber'] ?? '',
       state: data['state'] ?? '',
       country: data['country'] ?? '',
       selectedAddress: data['selectedAddress'] as bool,
       dateTime: (data['dateTime'] as Timestamp).toDate(),
     );
+    /* AddressModel(
+      id: document.id,
+      country: data['country'] ?? '',
+      phoneNumber: data['phoneNumber'] ?? '',
+      city: data['city'] ?? '',
+      selectedAddress: data['selectedAddress'] ?? false,
+      street: data['street'] ?? '',
+      postalCode: data['postalCode'] ?? '',
+      name: data['name'] ?? '',
+      state: data['state'] ?? '',
+      dateTime: (data['dateTime'] as Timestamp?)?.toDate() ?? DateTime.now(),
+    );*/
   }
 
   Map<String, dynamic> toMap() {

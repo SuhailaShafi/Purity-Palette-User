@@ -130,4 +130,9 @@ class CartController extends GetxController {
     cartItems.clear();
     updateCart();
   }
+
+  double orderTotalrice() {
+    final orderPrice = totalCartPrice.value + 200;
+    return orderPrice;
+  }
 }

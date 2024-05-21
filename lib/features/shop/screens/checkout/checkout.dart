@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:purity_pallette/common/widgets/appbar/appbar.dart';
 import 'package:purity_pallette/common/widgets/custom_shapes/containers/circular_container.dart';
 import 'package:purity_pallette/common/widgets/success_screen/success_screen.dart';
+import 'package:purity_pallette/features/shop/controllers/cart_controller.dart';
+import 'package:purity_pallette/features/shop/controllers/checkout_controller.dart';
+import 'package:purity_pallette/features/shop/controllers/order_controller.dart';
 import 'package:purity_pallette/features/shop/screens/cart/widgets/cart_items.dart';
 import 'package:purity_pallette/features/shop/screens/checkout/widgets/billing_address_section.dart';
 import 'package:purity_pallette/features/shop/screens/checkout/widgets/billing_payment_section.dart';
@@ -14,12 +18,17 @@ import 'package:purity_pallette/utils/constants/colors.dart';
 import 'package:purity_pallette/utils/constants/image_strings.dart';
 import 'package:purity_pallette/utils/constants/sizes.dart';
 import 'package:purity_pallette/utils/helpers/helper_function.dart';
+import 'package:purity_pallette/utils/popup/loaders.dart';
 
 class CheckoutScreen extends StatelessWidget {
   const CheckoutScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = CartController.instance;
+    final subTotal = controller.totalCartPrice.value;
+    final orderController = Get.put(OrderController());
+    final totalAmount = controller.orderTotalrice();
     final dark = SHelperFunction.isDarkMode(context);
     return Scaffold(
       appBar: SAppBar(
@@ -69,13 +78,19 @@ class CheckoutScreen extends StatelessWidget {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(SSizes.defaultSpace),
         child: ElevatedButton(
-            onPressed: () => Get.to(() => SuccessScreen(
-                  image: SImages.successImage,
-                  title: 'Payment Success',
-                  subtitle: 'Your item will be shipped soon!',
-                  onPressed: () => Get.offAll(() => NavigationMenu()),
-                )),
-            child: Text('Checkout Rs:256')),
+            onPressed: () => subTotal > 0
+                ? orderController.processOrder(totalAmount)
+                : SLoaders.warningSnackBar(
+                    title: 'Empty Cart',
+                    message: 'Add items in the cart to proceed'),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Checkout'),
+                Icon(Icons.currency_rupee),
+                Text('${totalAmount}'),
+              ],
+            )),
       ),
     );
   }

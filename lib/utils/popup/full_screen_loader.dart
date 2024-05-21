@@ -20,15 +20,13 @@ class SFullScreenLoader {
               : Colors.white,
           width: double.infinity,
           height: double.infinity,
-          child: Expanded(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 250,
-                ),
-                SAnimationLoaderWidget(text: text, animation: animation)
-              ],
-            ),
+          child: Column(
+            children: [
+              SizedBox(
+                height: 250,
+              ),
+              SAnimationLoaderWidget(text: text, animation: animation)
+            ],
           ),
         ),
       ),
